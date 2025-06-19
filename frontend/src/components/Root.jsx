@@ -1,6 +1,6 @@
-import { useAuth } from "../context/AuthContext";
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Root = () => {
 
@@ -14,8 +14,16 @@ const Root = () => {
  
  if(user.role === "admin") {
     navigate("/admin/dashboard");
- } else 
+ } else if(user.role === "customer"){
+navigate("/customer/dashboard");
+ } else {
+    navigate("/login")
+ }
+        } else {
+            navigate("/login")
         }
-    })
-
+    }, [user,navigate]);
+    return null;
 }
+
+export default Root;
